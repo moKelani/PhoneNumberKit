@@ -451,6 +451,8 @@ open class PhoneNumberTextField: UITextField, UITextFieldDelegate {
     }
 
     open func textFieldDidBeginEditing(_ textField: UITextField) {
+        layer.borderWidth = 0.5
+        layer.borderColor = UIColor(red: 0.969, green: 0.392, blue: 0, alpha: 1).cgColor
         if self.withExamplePlaceholder, self.withPrefix, let countryCode = phoneNumberKit.countryCode(for: currentRegion)?.description, (text ?? "").isEmpty {
             text = "+" + countryCode + " "
         }
@@ -462,6 +464,7 @@ open class PhoneNumberTextField: UITextField, UITextFieldDelegate {
     }
 
     open func textFieldDidEndEditing(_ textField: UITextField) {
+        layer.borderWidth = 0
         if self.withExamplePlaceholder, self.withPrefix, let countryCode = phoneNumberKit.countryCode(for: currentRegion)?.description,
             let text = textField.text,
             text == internationalPrefix(for: countryCode) {
